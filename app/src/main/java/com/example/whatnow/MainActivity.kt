@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             .setServerClientId(getString(R.string.your_web_client_id))
             .setAutoSelectEnabled(false)
             .build()
-
+      //check while user is typing
         googleFAB.setOnClickListener {
             binding.progressCircular.isVisible = true
             signWithGoogle()
