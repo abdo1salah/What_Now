@@ -66,6 +66,7 @@ class LoginScreen : AppCompatActivity() {
                         startActivity(i)
                         finishAffinity()
                     } else {
+                        binding.progressBar.isVisible = false
                         verifyEmail()
                         Toast.makeText(this, "Check your email first", Toast.LENGTH_LONG).show()
                     }
