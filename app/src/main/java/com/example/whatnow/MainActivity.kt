@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
-        if (currentUser != null) {
+        if (currentUser != null  && currentUser.isEmailVerified) {
                         Log.d("trace", currentUser.displayName.toString())
                         val i = Intent(this, CategoryActivity::class.java)
                         startActivity(i)
