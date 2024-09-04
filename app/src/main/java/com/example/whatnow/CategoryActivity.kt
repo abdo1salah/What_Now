@@ -13,9 +13,13 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.credentials.ClearCredentialStateRequest
+import androidx.credentials.CredentialManager
+import androidx.lifecycle.lifecycleScope
 import com.example.whatnow.databinding.ActivityCategoryBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 
 class CategoryActivity : AppCompatActivity() {
     lateinit var binding: ActivityCategoryBinding
@@ -63,6 +67,8 @@ class CategoryActivity : AppCompatActivity() {
             R.id.settings -> {
                 i = Intent(this, SettingsActivity::class.java)
                 startActivity(i)
+                val credentialManager: CredentialManager = CredentialManager.create(this)
+                lifecycleScope.launch { credentialManager.clearCredentialState(request = ClearCredentialStateRequest()) }
             }
 
             R.id.logout -> {
