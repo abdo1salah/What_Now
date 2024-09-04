@@ -73,7 +73,9 @@ class CategoryActivity : AppCompatActivity() {
                 Firebase.auth.signOut()
                 intentToMainActivity()
                  val credentialManager: CredentialManager = CredentialManager.create(this)
-                lifecycleScope.launch { credentialManager.clearCredentialState(request = ClearCredentialStateRequest()) }
+                lifecycleScope.launch { credentialManager.clearCredentialState(request = ClearCredentialStateRequest()) 
+                finish()
+                }
             }
             R.id.deletAccount -> {
                 val deleteAlert = alertDialogDeleteAccount()
