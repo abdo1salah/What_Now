@@ -19,6 +19,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.whatnow.databinding.ActivityCategoryBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class CategoryActivity : AppCompatActivity() {
@@ -74,9 +76,11 @@ class CategoryActivity : AppCompatActivity() {
                     val credentialManager: CredentialManager = CredentialManager.create(this@CategoryActivity)
                     credentialManager.clearCredentialState(request = ClearCredentialStateRequest())
                 }
-                Firebase.auth.signOut()
-                intentToMainActivity()
-                finishAffinity()
+                lifecycleScope.launch {
+                    Firebase.auth.signOut()
+                    intentToMainActivity()
+                }
+                finish()
             }
 
             R.id.deletAccount -> {
