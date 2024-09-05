@@ -83,13 +83,11 @@ class LoginScreen : AppCompatActivity() {
                         message.contains("network")-> Toast.makeText(this, "No internet connection try again!!", Toast.LENGTH_LONG).show()
                         else -> Toast.makeText(this, message, Toast.LENGTH_LONG).show()
                     }
-
                 }
             }
     }
 
     private fun verifyEmail() {
-        binding.progressBar.isVisible = true
         Toast.makeText(this, "Check Your Email", Toast.LENGTH_LONG).show()
         auth.currentUser!!.sendEmailVerification()
             .addOnCompleteListener { task ->
