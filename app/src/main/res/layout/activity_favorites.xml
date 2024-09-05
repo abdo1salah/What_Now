@@ -7,16 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".FavoritesActivity"
     android:orientation="vertical"
-    android:padding="8dp"
+
     >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Favorites"
-        android:textStyle="bold"
-        android:textSize="40sp"
-        android:layout_marginVertical="8dp"
-        />
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="25dp"
+        style="@style/explore_style"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favourites_list"
         android:layout_width="match_parent"
