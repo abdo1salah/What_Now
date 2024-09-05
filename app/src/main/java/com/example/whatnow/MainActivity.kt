@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if (currentUser != null  && currentUser.isEmailVerified) {
-                        Log.d("trace", currentUser.displayName.toString())
+                        //Log.d("trace", currentUser.displayName.toString())
                         val i = Intent(this, CategoryActivity::class.java)
                         startActivity(i)
                         finish()
@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(i)
                 Toast.makeText(this, "You are signed in !!", Toast.LENGTH_LONG).show()
             } catch (e: GetCredentialException) {
-                Log.d("trace","Error : ${e.message.toString() }")
+                //Log.d("trace","Error : ${e.message.toString() }")
                 if(e.message!!.contains("available"))
                     Toast.makeText(this,"You dont have account Google in your device or check your internet",Toast.LENGTH_LONG).show()
 

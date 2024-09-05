@@ -49,7 +49,7 @@ class ForgetPassActivity : AppCompatActivity() {
                     startActivity(i)
                 } else {
                     val message = task.exception!!.message
-                    Log.d("trace", message!!)
+                    //Log.d("trace", message!!)
                 }
             }
     }

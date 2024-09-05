@@ -64,7 +64,7 @@ class SignUpActivity : AppCompatActivity() {
             val nameText = binding.nameSignUp.editText?.text.toString()
             val emailText = binding.emailSignUp.editText?.text.toString()
             val passwordText = binding.passwordSignUp.editText?.text.toString()
-            Log.d("trace", nameText)
+            //Log.d("trace", nameText)
             if (nameText.isBlank() || passwordText.isBlank() || emailText.isBlank()) {
                 binding.nameSignUp.error = if (nameText.isBlank()) "*Required" else null
                 binding.passwordSignUp.error = if (passwordText.isBlank()) "*Required" else null
@@ -80,7 +80,7 @@ class SignUpActivity : AppCompatActivity() {
                 binding.nameSignUp.error = null
                 binding.passwordSignUp.error = null
                 binding.emailSignUp.error = null
-                Log.d("trace", "enter to signUp")
+                //Log.d("trace", "enter to signUp")
                 progressBar.isVisible = true
                 signUp(emailText.trim(), passwordText)
             }
