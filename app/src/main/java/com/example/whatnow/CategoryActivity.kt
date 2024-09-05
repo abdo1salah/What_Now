@@ -18,7 +18,11 @@ import androidx.credentials.CredentialManager
 import androidx.lifecycle.lifecycleScope
 import com.example.whatnow.databinding.ActivityCategoryBinding
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class CategoryActivity : AppCompatActivity() {
@@ -74,9 +78,11 @@ class CategoryActivity : AppCompatActivity() {
                     val credentialManager: CredentialManager = CredentialManager.create(this@CategoryActivity)
                     credentialManager.clearCredentialState(request = ClearCredentialStateRequest())
                 }
-                Firebase.auth.signOut()
-                intentToMainActivity()
-                finishAffinity()
+                lifecycleScope.launch {
+                    Firebase.auth.signOut()
+                    intentToMainActivity()
+                }
+                finish()
             }
 
             R.id.deletAccount -> {
@@ -116,6 +122,8 @@ class CategoryActivity : AppCompatActivity() {
                             Toast.makeText(this, "Account was deleted", Toast.LENGTH_LONG)
                                 .show()
                             val i = Intent(this, MainActivity::class.java)
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                             startActivity(i)
                             finish()
                         } else {

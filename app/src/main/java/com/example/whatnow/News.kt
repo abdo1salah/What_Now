@@ -12,6 +12,7 @@ data class Article(val title:String,
 
 
 data class Source(val name:String = "")
+
 data class Favorite(val title:String = "",
                     val url:String = "",
                     val image:String = "",
