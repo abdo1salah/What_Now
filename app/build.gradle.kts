@@ -69,6 +69,8 @@ dependencies {
 //    implementation ("com.google.android.libraries.identity.googleid:googleid:1.0.0")
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.android.gms:play-services-ads:21.5.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+
 
 
 

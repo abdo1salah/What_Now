@@ -3,13 +3,15 @@ package com.example.whatnow
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ShareCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
@@ -18,6 +20,7 @@ import com.example.whatnow.databinding.ListItemBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.GlobalScope
 
 
 class NewsAdapter(
@@ -61,22 +64,39 @@ class NewsAdapter(
                 .setText(url)
                 .startChooser()
         }
+        val docRef = db.collection(currentUser.uid.toString()).document(articles[position].title)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    Log.d("doc", "DocumentSnapshot data: ${document.data}")
+                    if(document.data != null){
+                        articles[position].checked = true
+                        holder.binding.favouriteFab.setImageDrawable(ContextCompat.getDrawable(a, R.drawable.star_on))
+                    }
+                } else {
+                    Log.d("doc", "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d("doc", "get failed with ", exception)
+            }
+
         holder.binding.favouriteFab.setOnClickListener {
-            if (!articles[position].isChecked) {
+            if (!articles[position].checked) {
+                articles[position].checked = true
                 db.collection(currentUser.uid.toString()).document(articles[position].title)
                     .set(articles[position])
                     .addOnSuccessListener {
                         holder.binding.favouriteFab.setImageDrawable(ContextCompat.getDrawable(a, R.drawable.star_on))
                         Toast.makeText(a, "Added to your favorites", Toast.LENGTH_SHORT).show()
-                        articles[position].isChecked = true
                     }
             } else {
+                articles[position].checked = false
                 db.collection(currentUser.uid.toString()).document(articles[position].title).delete()
                     .addOnSuccessListener {
                         holder.binding.favouriteFab.setImageDrawable(ContextCompat.getDrawable(a, R.drawable.star_off))
                         holder.binding.favouriteFab.setImageResource(R.drawable.star_off)
                         Toast.makeText(a, "Removed from your favorites", Toast.LENGTH_SHORT).show()
-                        articles[position].isChecked = false
                     }
             }
         }
