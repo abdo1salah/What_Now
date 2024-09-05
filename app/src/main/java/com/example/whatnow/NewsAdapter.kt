@@ -3,10 +3,12 @@ package com.example.whatnow
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ShareCompat
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -22,7 +24,7 @@ class NewsAdapter(
     val a: Activity,
     val articles: ArrayList<Article>,
     val country: String,
-    val currentUser: FirebaseAuth
+    val currentUser: FirebaseAuth,
 ) : Adapter<NewsAdapter.NewsViewHolder>() {
     val db = Firebase.firestore
 
@@ -64,12 +66,15 @@ class NewsAdapter(
                 db.collection(currentUser.uid.toString()).document(articles[position].title)
                     .set(articles[position])
                     .addOnSuccessListener {
+                        holder.binding.favouriteFab.setImageDrawable(ContextCompat.getDrawable(a, R.drawable.baseline_favorite_turnedon))
                         Toast.makeText(a, "Added to your favorites", Toast.LENGTH_SHORT).show()
                         articles[position].isChecked = true
                     }
             } else {
                 db.collection(currentUser.uid.toString()).document(articles[position].title).delete()
                     .addOnSuccessListener {
+                        holder.binding.favouriteFab.setImageDrawable(ContextCompat.getDrawable(a, R.drawable.baseline_favorite_turnedoff))
+                        holder.binding.favouriteFab.setImageResource(R.drawable.baseline_favorite_turnedoff)
                         Toast.makeText(a, "Removed from your favorites", Toast.LENGTH_SHORT).show()
                     }
             }

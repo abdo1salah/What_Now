@@ -11,4 +11,8 @@ data class Article(val title:String,
                    val source:Source ,var isChecked:Boolean = false)
 
 
-data class Source(val name:String)
+data class Source(val name:String = "")
+data class Favorite(val title:String = "",
+                    val url:String = "",
+                    val image:String = "",
+                    val source:Source? = null, var isChecked:Boolean = true)

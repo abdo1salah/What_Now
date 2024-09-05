@@ -83,6 +83,10 @@ class CategoryActivity : AppCompatActivity() {
                 val deleteAlert = alertDialogDeleteAccount()
                 deleteAlert.show()
             }
+            R.id.favourites ->{
+                val i = Intent(this,FavoritesActivity::class.java)
+                startActivity(i)
+            }
         }
 
         return super.onOptionsItemSelected(item)
@@ -113,6 +117,7 @@ class CategoryActivity : AppCompatActivity() {
                                 .show()
                             val i = Intent(this, MainActivity::class.java)
                             startActivity(i)
+                            finish()
                         } else {
                             Log.d("trace", "Task dialog failure")
                         }
