@@ -17,6 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.whatnow.databinding.ActivityMainBinding
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
@@ -102,8 +103,10 @@ class MainActivity : AppCompatActivity() {
             } catch (e: GetCredentialException) {
                 Log.d("trace","Error : ${e.message.toString() }")
                 if(e.message!!.contains("available"))
-                    Toast.makeText(this,"You dont have account Google in your device",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this,"You dont have account Google in your device or check your internet",Toast.LENGTH_LONG).show()
 
+            }catch (e: FirebaseNetworkException){
+                Toast.makeText(this,"check your internet connection",Toast.LENGTH_LONG).show()
             }
 
         }

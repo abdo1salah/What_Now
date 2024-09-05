@@ -8,6 +8,7 @@ data class Article(val title:String,
                    val url:String,
                    @SerializedName("urlToImage")
                    val image:String,
-                   val source:Source)
+                   val source:Source ,var isChecked:Boolean = false)
+
 
 data class Source(val name:String)
