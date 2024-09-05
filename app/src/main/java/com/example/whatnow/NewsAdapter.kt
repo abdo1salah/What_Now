@@ -66,15 +66,15 @@ class NewsAdapter(
                 db.collection(currentUser.uid.toString()).document(articles[position].title)
                     .set(articles[position])
                     .addOnSuccessListener {
-                        holder.binding.favouriteFab.setImageDrawable(ContextCompat.getDrawable(a, R.drawable.baseline_favorite_turnedon))
+                        holder.binding.favouriteFab.setImageDrawable(ContextCompat.getDrawable(a, R.drawable.star_on))
                         Toast.makeText(a, "Added to your favorites", Toast.LENGTH_SHORT).show()
                         articles[position].isChecked = true
                     }
             } else {
                 db.collection(currentUser.uid.toString()).document(articles[position].title).delete()
                     .addOnSuccessListener {
-                        holder.binding.favouriteFab.setImageDrawable(ContextCompat.getDrawable(a, R.drawable.baseline_favorite_turnedoff))
-                        holder.binding.favouriteFab.setImageResource(R.drawable.baseline_favorite_turnedoff)
+                        holder.binding.favouriteFab.setImageDrawable(ContextCompat.getDrawable(a, R.drawable.star_off))
+                        holder.binding.favouriteFab.setImageResource(R.drawable.star_off)
                         Toast.makeText(a, "Removed from your favorites", Toast.LENGTH_SHORT).show()
                         articles[position].isChecked = false
                     }

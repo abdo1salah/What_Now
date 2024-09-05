@@ -71,7 +71,7 @@
             app:layout_constraintTop_toBottomOf="@id/share_fab"
             app:layout_constraintStart_toStartOf="@+id/share_fab"
             android:layout_marginTop="10dp"
-            android:src="@drawable/baseline_favorite_turnedoff"
+            android:src="@drawable/star_off"
             android:id="@+id/favourite_fab"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
