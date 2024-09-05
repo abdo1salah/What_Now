@@ -10,6 +10,9 @@ import com.example.whatnow.databinding.ActivityNewsBinding
 import com.google.android.gms.ads.AdRequest
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.*
+import com.google.firebase.ktx.Firebase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class NewsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewsBinding
     lateinit var category : String
-
+    lateinit var auth:FirebaseAuth
     lateinit var country :String
     lateinit var url : String
 
@@ -30,6 +33,8 @@ class NewsActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityNewsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        auth = Firebase.auth
+        Log.d("testUID",auth.uid.toString())
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
         val pref = getSharedPreferences("user_data", Context.MODE_PRIVATE)
@@ -79,7 +84,7 @@ class NewsActivity : AppCompatActivity() {
         })
     }
     private fun showNews(articles: ArrayList<Article>){
-        val adapter = NewsAdapter(this,articles,country)
+        val adapter = NewsAdapter(this,articles,country,auth)
         binding.newsList.adapter =  adapter
     }
 

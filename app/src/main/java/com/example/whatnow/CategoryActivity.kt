@@ -70,16 +70,22 @@ class CategoryActivity : AppCompatActivity() {
             }
 
             R.id.logout -> {
+                lifecycleScope.launch {
+                    val credentialManager: CredentialManager = CredentialManager.create(this@CategoryActivity)
+                    credentialManager.clearCredentialState(request = ClearCredentialStateRequest())
+                }
                 Firebase.auth.signOut()
                 intentToMainActivity()
-                 val credentialManager: CredentialManager = CredentialManager.create(this)
-                lifecycleScope.launch { credentialManager.clearCredentialState(request = ClearCredentialStateRequest()) 
-                finish()
-                }
+                finishAffinity()
             }
+
             R.id.deletAccount -> {
                 val deleteAlert = alertDialogDeleteAccount()
                 deleteAlert.show()
+            }
+            R.id.favourites ->{
+                val i = Intent(this,FavoritesActivity::class.java)
+                startActivity(i)
             }
         }
 
@@ -111,6 +117,7 @@ class CategoryActivity : AppCompatActivity() {
                                 .show()
                             val i = Intent(this, MainActivity::class.java)
                             startActivity(i)
+                            finish()
                         } else {
                             Log.d("trace", "Task dialog failure")
                         }
