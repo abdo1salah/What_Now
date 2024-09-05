@@ -120,6 +120,8 @@ class CategoryActivity : AppCompatActivity() {
                             Toast.makeText(this, "Account was deleted", Toast.LENGTH_LONG)
                                 .show()
                             val i = Intent(this, MainActivity::class.java)
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                             startActivity(i)
                             finish()
                         } else {
