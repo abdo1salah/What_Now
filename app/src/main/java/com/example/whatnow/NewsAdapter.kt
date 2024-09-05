@@ -76,6 +76,7 @@ class NewsAdapter(
                         holder.binding.favouriteFab.setImageDrawable(ContextCompat.getDrawable(a, R.drawable.baseline_favorite_turnedoff))
                         holder.binding.favouriteFab.setImageResource(R.drawable.baseline_favorite_turnedoff)
                         Toast.makeText(a, "Removed from your favorites", Toast.LENGTH_SHORT).show()
+                        articles[position].isChecked = true
                     }
             }
         }
