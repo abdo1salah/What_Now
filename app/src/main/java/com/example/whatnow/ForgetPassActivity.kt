@@ -47,7 +47,7 @@ class ForgetPassActivity : AppCompatActivity() {
                     Toast.makeText(this, "Check your email", Toast.LENGTH_SHORT).show()
                     val i = Intent(this, LoginScreen::class.java)
                     startActivity(i)
-                    finish(i)
+                    finish()
                 } else {
                     val message = task.exception!!.message
                     Log.d("trace", message!!)
